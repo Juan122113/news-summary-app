@@ -1,4 +1,5 @@
 import Parser from "rss-parser";
+import { htmlToText } from 'html-to-text';
 
 const rssParser = new Parser();
 
@@ -21,9 +22,10 @@ export async function getNewsOfTheDay() {
                     {
                         source: feed.source,
                         title: item.title,
-                        summary: item.contentSnippet || item.content || ""
-                    }
-                );
+                        summary: htmlToText(item["content:encoded"] || item.contentSnippet || item.content || "",{
+                            wordwrap: 130
+                        })
+                    });
             });
         } catch (error) {
         console.log("Error leyendo RSS:", feed.url);
