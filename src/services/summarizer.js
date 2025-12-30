@@ -64,12 +64,19 @@ export async function summarizeAllNews(newsArray) {
     1. Lee todas las noticias.
     2. Si varias fuentes hablan de lo mismo, unifícalas en un solo punto.
     3. Genera un resumen ejecutivo en ESPAÑOL con viñetas.
-    4. Al final, añade una sección de "Tendencia" indicando cuál es el tema principal del día.
+    4. SELECCIÓN CRÍTICA: No resumas todo. Elige solo las 7-10 noticias más impactantes, relevantes o de mayor trascendencia social y política. Ignora notas de relleno.
+    5. JERARQUÍA: Comienza con la noticia más importante del día (la "portada").
+    6. CATEGORÍAS: Agrupa el resto en secciones claras (ej: Economía, Sociedad, Mundo).
 
     REGLAS:
     - No inventes datos. 
     - Si la información es insuficiente, no rellenes con conocimiento previo.
-    - Mantén un tono serio e informativo.
+    - Mantén un tono serio e informativo pero ágil.
+
+    FORMATO DE SALIDA (Usa Markdown):
+    - Usa ### para los títulos de las secciones.
+    - Usa **negritas** para nombres propios, cifras o conceptos clave.
+    - Si hay una noticia urgente, márcala con "🚨".
 
     NOTICIAS A PROCESAR:
     ${context}
