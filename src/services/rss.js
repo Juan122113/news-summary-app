@@ -2,6 +2,7 @@ import Parser from "rss-parser";
 import { htmlToText } from 'html-to-text';
 
 const rssParser = new Parser();
+const MAX_NEWS = 5;
 
 export async function getNewsOfTheDay() {
     const feeds = [
@@ -35,7 +36,8 @@ export async function getNewsOfTheDay() {
 
 
     return newsItems
-        .map(item =>
-            `Source: ${item.source}\nTitle: ${item.title}\nSummary: ${item.summary}`
-        ).join("\n\n");
+        .slice(0, MAX_NEWS);
+        // .map(item =>
+        //     `Source: ${item.source}\nTitle: ${item.title}\nSummary: ${item.summary}`
+        // ).join("\n\n");
 }

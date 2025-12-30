@@ -1,32 +1,28 @@
 import fetch from "node-fetch";
-import dotenv from "dotenv";
 
-dotenv.config();
+const API_URL =
+  "https://router.huggingface.co/hf-inference/models/facebook/bart-large-cnn";
 
-const HF_API_URL = "https://api-inference.huggingface.co/models/facebook/bart-large-cnn";
+export async function generateText(prompt) {
+  const response = await fetch(API_URL, {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${process.env.HUGGINGFACE_API_KEY}`,
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      inputs: prompt
+    })
+  });
 
-export async function summarizeNews(prompt) {
-    const response = await fetch(HF_API_URL, {
-        method: "POST",
-        headers: {
-            "Authorization": `Bearer ${process.env.HF_API_TOKEN}`,
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-            inputs: prompt,
-            parameters: {
-                max_length: 600,
-                min_length: 300,
-                do_sample: false
-            }
-        })
-    });
+  const text = await response.text();
 
-    const data = await response.json();
+  if (!response.ok) {
+    throw new Error(text);
+  }
 
-    if (data.error) {
-        throw new Error(data.error);
-    }
+  const data = JSON.parse(text);
 
-    return data[0].summary_text;
+  // bart-large-cnn devuelve esto
+  return data[0].summary_text;
 }
