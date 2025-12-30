@@ -2,13 +2,13 @@ import Parser from "rss-parser";
 import { htmlToText } from 'html-to-text';
 
 const rssParser = new Parser();
-const MAX_NEWS = 5;
+const MAX_NEWS = 15;
 
 export async function getNewsOfTheDay() {
     const feeds = [
-        { source: "Infobae", url: "https://www.infobae.com/feeds/rss/" },
+        { source: "Perfil", url: "https://www.perfil.com/feed" },
         { source: "La Nación", url: "https://www.lanacion.com.ar/arc/outboundfeeds/rss/" },
-        { source: "BBC Mundo", url: "https://feeds.bbci.co.uk/mundo/rss.xml" },
+        { source: "Diario Registrado", url: "https://www.diarioregistrado.com/rss.xml" },
     ];
 
     let newsItems = [];
