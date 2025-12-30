@@ -27,6 +27,7 @@
             resDiv.innerText = "⏳ Leyendo noticias y pidiendo resumen a Gemini...";
 
             try {
+                // btn.disabled = true;
                 const response = await fetch('/api/news');
                 const data = await response.json();
 
