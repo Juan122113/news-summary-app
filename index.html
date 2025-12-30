@@ -31,11 +31,13 @@
                 const data = await response.json();
 
                 const formattedText = data.summary
-                    .replace(/\*\*(.*?)\*\*/g, '<b>$1</b>')
-                    .replace(/^\s*[\-\*]\s+/gm, '. ')
+                    .replace(/\*\*(.*?)\*\*/g, '<b>$1</b>') // Negritas
+                    .replace(/^\s*[\-\*]\s+/gm, '• ')        // Viñetas
+                    .replace(/---/g, '<hr style="border:0; border-top:1px solid #eee; margin:20px 0;">') // Líneas
+                    .replace(/^\. (.*)/gm, '<li>$1</li>') // Puntos que empiezan con "."
                     .replace(/\n/g, '<br>');
 
-                resDiv.innerText = formattedText;
+                resDiv.innerHTML = formattedText;
             } catch (err) {
                 resDiv.innerText = "❌ Error al obtener el resumen.";
             } finally {
