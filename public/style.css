@@ -1,0 +1,80 @@
+/* Estilos Base (Enfoque Mobile) */
+:root {
+    --primary: #2563eb;
+    --bg: #f8fafc;
+    --text: #1e293b;
+    --card: #ffffff;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background-color: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    margin: 0;
+    padding: 15px; /* Margen pequeño para móviles */
+}
+
+/* Contenedor Principal */
+.container {
+    max-width: 100%; /* Ocupa todo el ancho en móvil */
+    margin: 0 auto;
+}
+
+/* Títulos */
+h1 {
+    font-size: 1.5rem; /* Tamaño cómodo para pulgar */
+    text-align: center;
+    color: var(--primary);
+}
+
+/* El cuadro del resumen */
+#resultado {
+    background: var(--card);
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    font-size: 1rem;
+    margin-bottom: 20px;
+}
+
+/* Links de Fuentes (Los que agregaste en el prompt) */
+#resultado a {
+    display: inline-block;
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 600;
+    background: #eff6ff;
+    padding: 4px 8px;
+    border-radius: 6px;
+    margin-top: 5px;
+    font-size: 0.9rem;
+}
+
+/* Botones Grandes (Fáciles de tocar) */
+button {
+    width: 100%; /* Ancho completo para facilitar el toque */
+    padding: 15px;
+    border: none;
+    border-radius: 10px;
+    background-color: var(--primary);
+    color: white;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+button:active {
+    transform: scale(0.98); /* Efecto táctil al presionar */
+}
+
+/* Ajustes para pantallas más grandes (Escritorio) */
+@media (min-width: 768px) {
+    .container {
+        max-width: 600px; /* Se centra y no se estira tanto */
+    }
+    body {
+        padding: 40px;
+    }
+}

@@ -207,9 +207,11 @@ const PORT = process.env.PORT || 3001;
 let cacheResumen = null;
 let ultimaVezGenerado = null;
 
+app.use(express.static('public'));
+
 // 1. Servir el archivo HTML
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'index.html'));
+    res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
 // 2. Ruta de la API con sistema de caché (1h 20m)

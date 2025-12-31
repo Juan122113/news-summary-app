@@ -138,18 +138,29 @@ export async function summarizeAllNews() {
             .join("\n\n---\n\n");
 
         const prompt = `
-                TU TAREA:
+        Eres un editor de noticias experto. Tu tarea es crear un ÚNICO boletín informativo basado en las noticias proporcionadas.
+
         1. Lee todas las noticias.
         2. Si varias fuentes hablan de lo mismo, unifícalas en un solo punto.
-        3. Genera un resumen ejecutivo en ESPAÑOL con viñetas.
-        4. SELECCIÓN CRÍTICA: No resumas todo. Elige solo las 7-10 noticias más impactantes, relevantes o de mayor trascendencia social y política. Ignora notas de relleno.
-        5. JERARQUÍA: Comienza con la noticia más importante del día (la "portada").
-        6. CATEGORÍAS: Agrupa el resto en secciones claras (ej: Economía, Sociedad, Mundo).
+        3. SELECCIÓN CRÍTICA: No resumas todo. Elige solo las 7-10 noticias más impactantes, relevantes o de mayor trascendencia social y política. Ignora notas de relleno.
+        4. JERARQUÍA: Comienza con la noticia más importante del día (la "portada").
+        5. CATEGORÍAS: Agrupa el resto en secciones claras (ej: Economía, Sociedad, Mundo).
+        6. FUENTES: **LINKS OBLIGATORIOS**: Al final de cada noticia, añade el link REAL que te proporcioné. 
+        FORMATO DEL LINK: [Leer más en Fuente](URL_DEL_LINK_PROPORCIONADO)
+        (Sustituye URL_DEL_LINK_PROPORCIONADO por el link correspondiente a esa noticia específica).
+        7. NO hagas dos secciones de resumen. Haz una sola lista.
 
         REGLAS:
         - No inventes datos. 
         - Si la información es insuficiente, no rellenes con conocimiento previo.
         - Mantén un tono serio e informativo pero ágil.
+        - No des opiniones personales.
+        - NO generes una introducción, ni un resumen previo.
+
+        ### 📂 Categoría
+        **Título de la noticia**
+        Descripción de la noticia...
+        [Leer más en Fuente](Link proporcionado)
 
         FORMATO DE SALIDA (Usa Markdown):
         - Usa ### para los títulos de las secciones.
