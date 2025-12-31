@@ -260,3 +260,5 @@ app.listen(PORT, () => {
 👉 URL: http://localhost:${PORT}
     `);
 });
+
+export default app;
