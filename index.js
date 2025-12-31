@@ -193,7 +193,7 @@ import express from 'express';
 import path from 'path';
 import { fileURLToPath } from 'url';
 
-// Importa tus servicios (revisa que las rutas sean correctas según tu carpeta src)
+// Importa tus servicios
 import { getNewsOfTheDay } from './src/services/rss.js';
 import { summarizeAllNews } from './src/services/summarizer.js';
 
@@ -204,10 +204,12 @@ const app = express();
 const PORT = process.env.PORT || 3001;
 
 // --- VARIABLES DE CACHÉ ---
-let cacheResumen = null;
-let ultimaVezGenerado = null;
+// let cacheResumen = null;
+// let ultimaVezGenerado = null;
 
+// Servir archivos estáticos desde la carpeta 'public'
 app.use(express.static(path.join(__dirname, 'public')));
+
 // 1. Servir el archivo HTML
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'index.html'));
@@ -215,43 +217,48 @@ app.get('/', (req, res) => {
 
 // 2. Ruta de la API con sistema de caché (1h 20m)
 app.get('/api/news', async (req, res) => {
-    const AHORA = Date.now();
-    const TIEMPO_ESPERA = 80 * 60 * 1000; 
+    // const AHORA = Date.now();
+    // const TIEMPO_ESPERA = 80 * 60 * 1000; 
 
-    if (cacheResumen && ultimaVezGenerado && (AHORA - ultimaVezGenerado < TIEMPO_ESPERA)) {
-        const minutosRestantes = Math.round((TIEMPO_ESPERA - (AHORA - ultimaVezGenerado)) / 60000);
-        console.log(`✅ Cache hit: Faltan ${minutosRestantes} min para actualizar.`);
+    // if (cacheResumen && ultimaVezGenerado && (AHORA - ultimaVezGenerado < TIEMPO_ESPERA)) {
+    //     const minutosRestantes = Math.round((TIEMPO_ESPERA - (AHORA - ultimaVezGenerado)) / 60000);
+    //     console.log(`✅ Cache hit: Faltan ${minutosRestantes} min para actualizar.`);
         
-        return res.json({ 
-            summary: cacheResumen,
-            cached: true 
-        });
-    }
+    //     return res.json({ 
+    //         summary: cacheResumen,
+    //         cached: true 
+    //     });
+    // }
+
+    // Configuramos el cache a nivel de servidor (Edge Network)
+    // s-maxage: tiempo que Vercel guarda la respuesta
+    // stale-while-revalidate: sirve el cache viejo mientras genera uno nuevo en el fondo
+    res.setHeader('Cache-Control', 's-maxage=4800, stale-while-revalidate');
 
     try {
         console.log("🔄 Iniciando nueva extracción y generación (Gasto de API)...");
         const data = await summarizeAllNews(); 
         
-        cacheResumen = data.summary;
-        ultimaVezGenerado = AHORA;
+        // cacheResumen = data.summary;
+        // ultimaVezGenerado = AHORA;
 
         res.json({ 
-            summary: cacheResumen,
-            cached: false 
+            // summary: cacheResumen,
+            summary: data.summary,
+            cached: false // Para el primer usuario será false, para los demás lo maneja Vercel
         });
     } catch (error) {
         console.error("❌ Error en el proceso:", error);
 
-        if (cacheResumen) {
-            console.log("⚠️ API falló, entregando caché de emergencia.");
-            return res.json({ summary: cacheResumen, warning: "Servicio en alta demanda." });
-        }
+        // if (cacheResumen) {
+        //     console.log("⚠️ API falló, entregando caché de emergencia.");
+        //     return res.json({ summary: cacheResumen, warning: "Servicio en alta demanda." });
 
         res.status(500).json({ error: "No se pudo obtener el resumen." });
-    }
+        }
+    
 });
 
-// --- ¡IMPORTANTE!: ESTO FALTABA ---
 // El servidor necesita "escuchar" en el puerto para que Render sepa que está vivo
 app.listen(PORT, () => {
     console.log(`
