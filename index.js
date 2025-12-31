@@ -207,8 +207,7 @@ const PORT = process.env.PORT || 3001;
 let cacheResumen = null;
 let ultimaVezGenerado = null;
 
-app.use(express.static('public'));
-
+app.use(express.static(path.join(__dirname, 'public')));
 // 1. Servir el archivo HTML
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'index.html'));
