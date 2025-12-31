@@ -138,17 +138,28 @@ export async function summarizeAllNews() {
             .join("\n\n---\n\n");
 
         const prompt = `
-        Eres un editor de noticias experto. Tu tarea es crear un ÚNICO boletín informativo basado en las noticias proporcionadas.
+        Eres un editor de cierre de un diario nacional. Tu tarea es crear un ÚNICO boletín informativo basado en las noticias proporcionadas. Tu objetivo es informar con DATOS, no con presentaciones vacías.
 
+        NOTICIAS A PROCESAR:
+        ${context}
+
+        REGLAS DE ORO PARA EL CONTENIDO:
         1. Lee todas las noticias.
         2. Si varias fuentes hablan de lo mismo, unifícalas en un solo punto.
-        3. SELECCIÓN CRÍTICA: No resumas todo. Elige solo las 7-10 noticias más impactantes, relevantes o de mayor trascendencia social y política del día. Ignora notas de relleno.
+        3. SELECCIÓN CRÍTICA: No resumas todo. Elige solo las 7-10 noticias más trascendentes. Ignora notas de relleno.
         4. JERARQUÍA: Comienza con la noticia más importante del día (la "portada").
         5. CATEGORÍAS: Agrupa el resto en secciones claras (ej: Economía, Sociedad, Mundo).
         6. FUENTES: **LINKS OBLIGATORIOS**: Al final de cada noticia, añade el link REAL de cada una. 
         FORMATO DEL LINK: [Leer más en Fuente](URL_DEL_LINK_PROPORCIONADO)
         (Sustituye URL_DEL_LINK_PROPORCIONADO por el link correspondiente a esa noticia específica).
         7. NO hagas dos secciones de resumen. Haz una sola lista.
+        8. PRECISIÓN DE ATRIBUCIÓN: No mezcles causas con alertas oficiales. Asegúrate de que las acciones de organismos (ej: SMN, BCRA) se vinculen estrictamente a su competencia. (Ejemplo: El SMN alerta por el clima, no por fallas eléctricas).
+        9. PROHIBIDA LA REDUNDANCIA: No repitas el título en la descripción. Si el título dice "Aumento de nafta", la descripción debe decir cuánto aumenta, a partir de cuándo y por qué.
+        10. DENSIDAD INFORMATIVA: Cada frase debe aportar un dato nuevo (nombres, cifras, porcentajes, lugares exactos). Si una noticia no tiene datos concretos, ignórala.
+        FILTRO DE RELEVANCIA: Prioriza impacto Nacional. Ignora noticias locales menores (ej: multas en Córdoba, servicios locales) a menos que afecten a todo el país.
+        11. ESTILO RESUMEN, NO INTRODUCCIÓN: No digas "Se informa sobre...", di directamente qué pasó. 
+        - MAL: "Se informa sobre el horario de bancos." 
+        - BIEN: "Los bancos operarán hasta las 11:00 AM por el asueto de fin de año."
 
         REGLAS:
         - No inventes datos. 
@@ -166,9 +177,6 @@ export async function summarizeAllNews() {
         - Usa ### para los títulos de las secciones.
         - Usa **negritas** para nombres propios, cifras o conceptos clave.
         - Si hay una noticia urgente, márcala con "🚨".
-
-        NOTICIAS A PROCESAR:
-        ${context}
     `;
 
         const summary = await generateAiResponse(prompt);

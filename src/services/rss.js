@@ -6,7 +6,7 @@ const MAX_NEWS = 15;
 
 export async function getNewsOfTheDay() {
     const feeds = [
-        { source: "Perfil", url: "https://www.perfil.com/feed" },
+        { source: "Buenos Aires Times", url: "https://www.batimes.com.ar/feed" },
         { source: "La Nación", url: "https://www.lanacion.com.ar/arc/outboundfeeds/rss/" },
         { source: "Diario Registrado", url: "https://www.diarioregistrado.com/rss.xml" },
     ];
