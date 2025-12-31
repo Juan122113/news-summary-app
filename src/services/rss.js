@@ -23,6 +23,7 @@ export async function getNewsOfTheDay() {
                     {
                         source: feed.source,
                         title: item.title,
+                        link: item.link,
                         summary: htmlToText(item["content:encoded"] || item.contentSnippet || item.content || "",{
                             wordwrap: 130
                         })

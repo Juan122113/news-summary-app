@@ -1,5 +1,13 @@
 const btn = document.getElementById('btn');
 const resDiv = document.getElementById('resultado');
+
+const renderer = new marked.Renderer();
+
+renderer.link = ({ href, title, text }) => {
+    return `<a href="${href}" target="_blank" rel="noopener noreferrer" title="${title || ''}">${text}</a>`;
+};
+
+marked.setOptions({renderer: renderer});
     
 btn.addEventListener('click', async () => {
     btn.disabled = true;

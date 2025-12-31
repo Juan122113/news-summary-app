@@ -142,10 +142,10 @@ export async function summarizeAllNews() {
 
         1. Lee todas las noticias.
         2. Si varias fuentes hablan de lo mismo, unifícalas en un solo punto.
-        3. SELECCIÓN CRÍTICA: No resumas todo. Elige solo las 7-10 noticias más impactantes, relevantes o de mayor trascendencia social y política. Ignora notas de relleno.
+        3. SELECCIÓN CRÍTICA: No resumas todo. Elige solo las 7-10 noticias más impactantes, relevantes o de mayor trascendencia social y política del día. Ignora notas de relleno.
         4. JERARQUÍA: Comienza con la noticia más importante del día (la "portada").
         5. CATEGORÍAS: Agrupa el resto en secciones claras (ej: Economía, Sociedad, Mundo).
-        6. FUENTES: **LINKS OBLIGATORIOS**: Al final de cada noticia, añade el link REAL que te proporcioné. 
+        6. FUENTES: **LINKS OBLIGATORIOS**: Al final de cada noticia, añade el link REAL de cada una. 
         FORMATO DEL LINK: [Leer más en Fuente](URL_DEL_LINK_PROPORCIONADO)
         (Sustituye URL_DEL_LINK_PROPORCIONADO por el link correspondiente a esa noticia específica).
         7. NO hagas dos secciones de resumen. Haz una sola lista.
