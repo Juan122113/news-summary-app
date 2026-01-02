@@ -12,47 +12,39 @@ const __dirname = path.dirname(__filename);
 const app = express();
 const PORT = process.env.PORT || 3001;
 
-// Servir archivos estáticos desde la carpeta 'public'
+// Serve static files from the 'public' folder
 app.use(express.static(path.join(__dirname, 'public')));
 
-// 1. Servir el archivo HTML
+// 1. Serve the HTML file
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
-// 2. Ruta de la API con sistema de caché (1h 20m)
+// 2. API route with caching system (1h 20m)
 app.get('/api/news', async (req, res) => {
 
-    // Configuramos el cache a nivel de servidor (Edge Network)
-    // s-maxage: tiempo que Vercel guarda la respuesta
-    // stale-while-revalidate: sirve el cache viejo mientras genera uno nuevo en el fondo
+    // Configure server-side cache (Edge Network)
+    // s-maxage: time Vercel stores the response
+    // stale-while-revalidate: serves old cache while generating a new one in the background
     res.setHeader('Cache-Control', 's-maxage=4800, stale-while-revalidate');
 
     try {
         console.log("🔄 Iniciando nueva extracción y generación (Gasto de API)...");
         const data = await summarizeAllNews(); 
-        
-        // cacheResumen = data.summary;
-        // ultimaVezGenerado = AHORA;
 
         res.json({ 
-            // summary: cacheResumen,
             summary: data.summary,
-            cached: false // Para el primer usuario será false, para los demás lo maneja Vercel
+            cached: false // It will be false for the first user; Vercel handles it for subsequent users
         });
     } catch (error) {
         console.error("❌ Error en el proceso:", error);
-
-        // if (cacheResumen) {
-        //     console.log("⚠️ API falló, entregando caché de emergencia.");
-        //     return res.json({ summary: cacheResumen, warning: "Servicio en alta demanda." });
 
         res.status(500).json({ error: "No se pudo obtener el resumen." });
         }
     
 });
 
-// El servidor necesita "escuchar" en el puerto para que Render sepa que está vivo
+// The server needs to "listen" on the port so the hosting service knows it's alive
 app.listen(PORT, () => {
     console.log(`
 🚀 ¡Servidor funcionando!

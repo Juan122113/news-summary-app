@@ -20,7 +20,6 @@ export async function getNewsOfTheDay() {
 
             feedData.items.slice(0, 5).forEach(item => {
                 newsItems.push(
-                    // `[${feed.name}] ${item.title} - ${item.contentSnippet}`
                     {
                         source: feed.source,
                         title: item.title,
@@ -39,7 +38,5 @@ export async function getNewsOfTheDay() {
 
     return newsItems
         .slice(0, MAX_NEWS);
-        // .map(item =>
-        //     `Source: ${item.source}\nTitle: ${item.title}\nSummary: ${item.summary}`
-        // ).join("\n\n");
+        
 }
