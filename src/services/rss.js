@@ -2,13 +2,14 @@ import Parser from "rss-parser";
 import { htmlToText } from 'html-to-text';
 
 const rssParser = new Parser();
-const MAX_NEWS = 15;
+const MAX_NEWS = 20;
 
 export async function getNewsOfTheDay() {
     const feeds = [
         { source: "Buenos Aires Times", url: "https://www.batimes.com.ar/feed" },
         { source: "La Nación", url: "https://www.lanacion.com.ar/arc/outboundfeeds/rss/" },
         { source: "Diario Registrado", url: "https://www.diarioregistrado.com/rss.xml" },
+        { source: "Perfil", url: "https://www.perfil.com/feed" },
     ];
 
     let newsItems = [];

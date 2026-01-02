@@ -156,8 +156,8 @@ export async function summarizeAllNews() {
         8. PRECISIÓN DE ATRIBUCIÓN: No mezcles causas con alertas oficiales. Asegúrate de que las acciones de organismos (ej: SMN, BCRA) se vinculen estrictamente a su competencia. (Ejemplo: El SMN alerta por el clima, no por fallas eléctricas).
         9. PROHIBIDA LA REDUNDANCIA: No repitas el título en la descripción. Si el título dice "Aumento de nafta", la descripción debe decir cuánto aumenta, a partir de cuándo y por qué.
         10. DENSIDAD INFORMATIVA: Cada frase debe aportar un dato nuevo (nombres, cifras, porcentajes, lugares exactos). Si una noticia no tiene datos concretos, ignórala.
-        FILTRO DE RELEVANCIA: Prioriza impacto Nacional. Ignora noticias locales menores (ej: multas en Córdoba, servicios locales) a menos que afecten a todo el país.
-        11. ESTILO RESUMEN, NO INTRODUCCIÓN: No digas "Se informa sobre...", di directamente qué pasó. 
+        11. FILTRO DE RELEVANCIA: Prioriza impacto Nacional. Ignora noticias locales menores (ej: multas en Córdoba, servicios locales) a menos que afecten a todo el país.
+        12. ESTILO RESUMEN, NO INTRODUCCIÓN: No digas "Se informa sobre...", di directamente qué pasó. 
         - MAL: "Se informa sobre el horario de bancos." 
         - BIEN: "Los bancos operarán hasta las 11:00 AM por el asueto de fin de año."
 

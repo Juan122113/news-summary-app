@@ -1,4 +1,3 @@
-/* Estilos Base (Enfoque Mobile) */
 :root {
     --primary: #2563eb;
     --bg: #f8fafc;
@@ -12,34 +11,32 @@ body {
     color: var(--text);
     line-height: 1.6;
     margin: 0;
-    padding: 15px; /* Margen pequeño para móviles */
+    padding: 15px;
 }
 
-/* Contenedor Principal */
-.container {
-    max-width: 100%; /* Ocupa todo el ancho en móvil */
-    margin: 0 auto;
+.card {
+    background: white;
+    padding: 30px;
+    border-radius: 8px; 
 }
 
-/* Títulos */
 h1 {
-    font-size: 1.5rem; /* Tamaño cómodo para pulgar */
+    font-size: 1.5rem;
     text-align: center;
     color: var(--primary);
 }
 
-/* El cuadro del resumen */
-#resultado {
+#result {
     background: var(--card);
     padding: 20px;
     border-radius: 12px;
-    /* box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); */
     font-size: 1rem;
     margin-bottom: 20px;
+    margin-top: 20px;
+    white-space: pre-wrap; 
 }
 
-/* Links de Fuentes (Los que agregaste en el prompt) */
-#resultado a {
+#result a {
     display: inline-block;
     color: var(--primary);
     text-decoration: none;
@@ -51,10 +48,9 @@ h1 {
     font-size: 0.9rem;
 }
 
-/* Botones Grandes (Fáciles de tocar) */
 button {
-    width: 100%; /* Ancho completo para facilitar el toque */
-    padding: 15px;
+    width: 100%;
+    padding: 10px 20px;
     border: none;
     border-radius: 10px;
     background-color: var(--primary);
@@ -66,15 +62,17 @@ button {
 }
 
 button:active {
-    transform: scale(0.98); /* Efecto táctil al presionar */
+    transform: scale(0.98);
 }
 
-/* Ajustes para pantallas más grandes (Escritorio) */
+button:disabled { 
+    background: #ccc;
+}
+
 @media (min-width: 768px) {
-    .container {
-        max-width: 600px; /* Se centra y no se estira tanto */
-    }
+
     body {
         padding: 40px;
     }
+    
 }
